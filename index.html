@@ -5,6 +5,42 @@
     <title>Title</title>
 </head>
 <body>
- HELLO
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+ <script>
+     $(function (){
+         console.log("aaa");
+         callAPI();
+     });
+
+
+     function callAPI(){
+         console.log("CallAPI...")
+         var url ="https://capi.showtimes.com.tw/1/events/listForProgram/11048?date=2023-04-24"
+         console.log(url); //for debug
+         $.ajax({
+             url: url,
+             dataType: "json",
+             type: "get",
+             //data:data,
+             //Type: Function(Anything data, String textStatus, jqXHR jqXHR)
+             success: function(data, textStatus, jqXHR) {
+                 console.log(JSON.stringify(data));
+                 //data.payload.meta.total
+                 for (var i=0;i<data.payload.venues.length;i++){
+                     console.log("MyTEST => "+i+"  ==>" +data.payload.venues[i].name);
+                 }
+             },
+             //Type: Function(jqXHR jqXHR, String textStatus, String errorThrown)
+             error: function(jqXHR, textStatus, errorThrown) {
+
+             }
+         });
+         console.log("CallAPI... END")
+
+     }
+ </script>
 </body>
 </html>
